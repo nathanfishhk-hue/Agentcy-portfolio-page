@@ -67,7 +67,7 @@ export default function FeaturedRow({ projects }: Props) {
 
           {/* Cards container - all same size */}
           <div className="flex items-start justify-center gap-4 md:gap-8 h-80 md:h-96 px-16 md:px-0">
-            {getVisibleProjects().map((p, index) => (
+            {getVisibleProjects().map((p) => (
               <div
                 key={`${p.slug}-${currentIndex}`}
                 className={`transition-all duration-300 ${
