@@ -18,7 +18,7 @@ export default function FeaturedRow({ projects }: Props) {
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % projects.length);
       setIsAnimating(false);
-    }, 500);
+    }, 350);
   };
 
   const prevCard = () => {
@@ -27,7 +27,7 @@ export default function FeaturedRow({ projects }: Props) {
     setTimeout(() => {
       setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
       setIsAnimating(false);
-    }, 500);
+    }, 350);
   };
 
   useEffect(() => {
@@ -35,11 +35,12 @@ export default function FeaturedRow({ projects }: Props) {
     return () => clearInterval(timer);
   }, [isAnimating]);
 
+  // Get current project and neighbors for 3-card view
   const getVisibleProjects = () => {
     const result = [];
     for (let i = 0; i < 3; i++) {
       const index = (currentIndex + i) % projects.length;
-      result.push({ ...projects[index], position: i });
+      result.push(projects[index]);
     }
     return result;
   };
@@ -52,10 +53,11 @@ export default function FeaturedRow({ projects }: Props) {
         </h2>
 
         <div className="relative flex items-center justify-center">
-          {/* Left button - more visible */}
+          {/* Left button */}
           <button
             onClick={prevCard}
-            className="absolute left-2 md:left-8 z-20 p-3 rounded-full bg-black border-2 border-teal text-teal hover:bg-teal hover:text-black transition-all shadow-lg"
+            disabled={isAnimating}
+            className="absolute left-2 md:left-8 z-20 p-3 rounded-full bg-black border-2 border-teal text-teal hover:bg-teal hover:text-black transition-all shadow-lg disabled:opacity-50"
             aria-label="Previous card"
           >
             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,39 +65,30 @@ export default function FeaturedRow({ projects }: Props) {
             </svg>
           </button>
 
-          {/* Cards container */}
-          <div className="flex items-center justify-center gap-4 md:gap-8 h-80 md:h-96 px-16 md:px-0">
-            {getVisibleProjects().map((p, index) => {
-              const isCenter = index === 1;
-              const cardWidth = isCenter ? 'w-56 md:w-64' : 'w-44 md:w-56';
-              return (
-                <div
-                  key={`${p.slug}-${currentIndex}`}
-                  className={`transition-all ${
-                    isAnimating 
-                      ? 'opacity-0 scale-90' 
-                      : 'opacity-100 scale-100'
-                  }`}
-                  style={{
-                    transform: isCenter 
-                      ? 'translateX(0) scale(1.05)' 
-                      : `translateX(${index === 0 ? '-30px' : index === 2 ? '30px' : '0'}) scale(0.9)`,
-                    zIndex: isCenter ? 10 : 5,
-                    transition: 'all 600ms cubic-bezier(0.23, 1, 0.32, 1)',
-                  }}
-                >
-                  <div className={cardWidth}>
-                    <ProjectCard project={p} featured />
-                  </div>
+          {/* Cards container - all same size */}
+          <div className="flex items-start justify-center gap-4 md:gap-8 h-80 md:h-96 px-16 md:px-0">
+            {getVisibleProjects().map((p, index) => (
+              <div
+                key={`${p.slug}-${currentIndex}`}
+                className={`transition-all duration-300 ${
+                  isAnimating ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'
+                }`}
+                style={{
+                  transition: 'opacity 350ms ease, transform 350ms ease',
+                }}
+              >
+                <div className="w-56 md:w-64">
+                  <ProjectCard project={p} featured />
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
 
-          {/* Right button - more visible */}
+          {/* Right button */}
           <button
             onClick={nextCard}
-            className="absolute right-2 md:right-8 z-20 p-3 rounded-full bg-black border-2 border-teal text-teal hover:bg-teal hover:text-black transition-all shadow-lg"
+            disabled={isAnimating}
+            className="absolute right-2 md:right-8 z-20 p-3 rounded-full bg-black border-2 border-teal text-teal hover:bg-teal hover:text-black transition-all shadow-lg disabled:opacity-50"
             aria-label="Next card"
           >
             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
