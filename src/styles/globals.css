@@ -222,24 +222,16 @@ a {
   }
 }
 
-/* Project Card Styles - smaller cards for all projects */
-.card-sm {
-  max-width: 280px;
+/* Project Card Styles - consistent sizing */
+.project-card {
+  width: 100%;
+  max-width: 260px;
 }
 
-.card-sm .thumbnail {
-  aspect-ratio: 16/9;
-  background-size: cover;
-  background-position: center;
-}
-
-/* Better text centering with padding */
-.card-content-centered {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1.25rem;
+@media (min-width: 768px) {
+  .project-card {
+    max-width: 280px;
+  }
 }
 
 /* Carousel animation styles */

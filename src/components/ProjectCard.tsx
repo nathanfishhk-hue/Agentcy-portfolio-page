@@ -29,7 +29,7 @@ export default function ProjectCard({ project, style, featured = false }: Props)
   const maxTech = featured ? 3 : 4;
 
   return (
-    <article className={cardClasses} style={style}>
+    <article className={`${cardClasses} project-card`} style={style}>
       {/* Thumbnail */}
       <div
         className="w-full"

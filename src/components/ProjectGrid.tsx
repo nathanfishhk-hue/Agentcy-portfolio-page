@@ -16,22 +16,16 @@ export default function ProjectGrid({ projects }: Props) {
     );
   }
 
-  const lastIndex = projects.length - 1;
-
   return (
     <section className="py-20">
       <div className="container">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {projects.map((p, index) => (
-            <div 
-              key={p.slug}
-              className={index === lastIndex ? 'lg:col-start-2 lg:col-span-2 grid-last-center' : ''}
-            >
-              <ProjectCard 
-                project={p} 
-                style={{ '--stagger-index': 0 } as React.CSSProperties} 
-              />
-            </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 justify-items-center">
+          {projects.map((p) => (
+            <ProjectCard 
+              key={p.slug} 
+              project={p} 
+              style={{ '--stagger-index': 0 } as React.CSSProperties} 
+            />
           ))}
         </div>
       </div>
