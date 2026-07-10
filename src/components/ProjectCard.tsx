@@ -22,10 +22,10 @@ export default function ProjectCard({ project, style, featured = false }: Props)
     ? 'fade-in stagger rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all flex flex-col h-full bg-white'
     : 'fade-in stagger rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all flex flex-col h-full bg-white';
 
-  const contentPadding = featured ? 'p-3' : 'p-5';
-  const titleSize = featured ? 'text-base' : 'text-xl';
-  const descriptionSize = featured ? 'text-xs' : 'text-sm';
-  const badgeGap = featured ? 'gap-1' : 'gap-2';
+  const contentPadding = featured ? 'p-3' : 'p-4';
+  const titleSize = featured ? 'text-base' : 'text-lg';
+  const descriptionSize = featured ? 'text-xs' : 'text-xs';
+  const badgeGap = featured ? 'gap-1' : 'gap-1';
   const maxTech = featured ? 3 : 4;
 
   return (
