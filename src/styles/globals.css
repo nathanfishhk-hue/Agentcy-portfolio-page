@@ -104,6 +104,7 @@ a {
 .text-gray-300 { color: #d1d5db; }
 .text-teal { color: var(--color-teal); }
 .text-teal-dark { color: var(--color-teal-dark); }
+.border-teal { border-color: var(--color-teal); }
 
 /* Buttons */
 .btn {

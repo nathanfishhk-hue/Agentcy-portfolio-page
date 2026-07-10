@@ -3,6 +3,7 @@ import type { Project } from './data/projects';
 import { projects } from './data/projects';
 import { ALL_CATEGORIES } from './data/categories';
 import type { Category } from './data/categories';
+import Header from './components/Header';
 import Hero from './components/Hero';
 import FeaturedRow from './components/FeaturedRow';
 import CategoryFilters from './components/CategoryFilters';
@@ -20,6 +21,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <Header />
       <Hero />
       <FeaturedRow projects={featured} />
       <CategoryFilters
