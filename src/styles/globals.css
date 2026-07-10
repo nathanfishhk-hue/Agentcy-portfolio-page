@@ -10,6 +10,12 @@
   --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --container-max: 80rem;
   --radius: 0.5rem;
+  
+  /* Gradient colors from agentcy.co.za */
+  --navy-from: #12171C;
+  --navy-to: #0d1b2a;
+  --gray-from: #E8E7F0;
+  --gray-to: #DCDAE8;
 }
 
 * {
@@ -232,6 +238,15 @@ a {
   .project-card {
     max-width: 280px;
   }
+}
+
+/* Alternating Gradient Backgrounds - from agentcy.co.za */
+.bg-gradient-navy {
+  background: linear-gradient(to bottom, var(--navy-from), var(--navy-to));
+}
+
+.bg-gradient-light {
+  background: linear-gradient(to bottom, var(--gray-from), var(--gray-to));
 }
 
 /* Carousel animation styles */

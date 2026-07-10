@@ -8,7 +8,7 @@ interface Props {
 
 export default function CategoryFilters({ categories, active, onChange }: Props) {
   return (
-    <section id="projects" className="py-12">
+    <section id="projects" className="py-12 bg-gradient-light">
       <div className="container">
         <div className="flex flex-wrap gap-3 justify-center">
           <button

@@ -20,7 +20,7 @@ export default function ProjectCard({ project, style, featured = false }: Props)
 
   const cardClasses = featured
     ? 'fade-in stagger rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all flex flex-col h-full bg-white'
-    : 'fade-in stagger rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all flex flex-col h-full bg-white';
+    : 'fade-in stagger rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all flex flex-col h-full bg-white project-card';
 
   const contentPadding = featured ? 'p-3' : 'p-4';
   const titleSize = featured ? 'text-base' : 'text-lg';
@@ -29,7 +29,7 @@ export default function ProjectCard({ project, style, featured = false }: Props)
   const maxTech = featured ? 3 : 4;
 
   return (
-    <article className={`${cardClasses} project-card`} style={style}>
+    <article className={cardClasses} style={style}>
       {/* Thumbnail */}
       <div
         className="w-full"
@@ -39,8 +39,8 @@ export default function ProjectCard({ project, style, featured = false }: Props)
 
       {/* Content */}
       <div className={`${contentPadding} flex-1 flex flex-col items-center text-center`}>
-        <h3 className={`${titleSize} font-semibold mb-2 text-white`}>{project.name}</h3>
-        <p className={`${descriptionSize} mb-4 flex-1 text-gray-300 px-2`}>
+        <h3 className={`${titleSize} font-semibold mb-2 text-black`}>{project.name}</h3>
+        <p className={`${descriptionSize} mb-4 flex-1 text-gray-600 px-2`}>
           {project.description || project.tagline}
         </p>
 
