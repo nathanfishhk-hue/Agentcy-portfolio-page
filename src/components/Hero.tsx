@@ -18,7 +18,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={ref} className="fade-in pt-24 pb-16 text-center">
+    <section ref={ref} className="fade-in pt-24 md:pt-32 pb-16 text-center">
       <div className="container">
         <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white">
           Our Work
