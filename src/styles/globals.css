@@ -218,19 +218,24 @@ a {
   }
 }
 
-/* Smaller featured card */
-.featured-card {
-  max-width: 300px;
+/* Project Card Styles - smaller cards for all projects */
+.card-sm {
+  max-width: 280px;
 }
 
-.featured-card .thumbnail {
+.card-sm .thumbnail {
   aspect-ratio: 16/9;
   background-size: cover;
   background-position: center;
 }
 
-.featured-card .content {
-  padding: 1rem;
+/* Better text centering with padding */
+.card-content-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.25rem;
 }
 
 /* Carousel animation styles */

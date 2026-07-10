@@ -18,7 +18,7 @@ export default function FeaturedRow({ projects }: Props) {
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % projects.length);
       setIsAnimating(false);
-    }, 300);
+    }, 500);
   };
 
   const prevCard = () => {
@@ -27,7 +27,7 @@ export default function FeaturedRow({ projects }: Props) {
     setTimeout(() => {
       setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
       setIsAnimating(false);
-    }, 300);
+    }, 500);
   };
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function FeaturedRow({ projects }: Props) {
     const result = [];
     for (let i = 0; i < 3; i++) {
       const index = (currentIndex + i) % projects.length;
-      result.push(projects[index]);
+      result.push({ ...projects[index], position: i });
     }
     return result;
   };
@@ -47,39 +47,44 @@ export default function FeaturedRow({ projects }: Props) {
   return (
     <section className="py-16 border-b border-gray-200">
       <div className="container">
-        <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-white">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-teal">
           Featured Projects
         </h2>
 
         <div className="relative flex items-center justify-center">
-          {/* Left button */}
+          {/* Left button - more visible */}
           <button
             onClick={prevCard}
-            className="absolute left-4 z-10 p-2 rounded-full bg-black border border-teal text-teal hover:bg-teal hover:text-black transition-all"
+            className="absolute left-2 md:left-8 z-20 p-3 rounded-full bg-black border-2 border-teal text-teal hover:bg-teal hover:text-black transition-all shadow-lg"
             aria-label="Previous card"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
           {/* Cards container */}
-          <div className="flex items-center justify-center gap-8 h-96">
+          <div className="flex items-center justify-center gap-4 md:gap-8 h-80 md:h-96 px-16 md:px-0">
             {getVisibleProjects().map((p, index) => {
               const isCenter = index === 1;
+              const cardWidth = isCenter ? 'w-56 md:w-64' : 'w-44 md:w-56';
               return (
                 <div
                   key={`${p.slug}-${currentIndex}`}
-                  className={`transition-all duration-300 ${
-                    isAnimating ? 'scale-95 opacity-0' : 'scale-100 opacity-100'
-                  } ${isCenter ? '' : 'scale-75 opacity-50 blur-sm'}`}
+                  className={`transition-all ${
+                    isAnimating 
+                      ? 'opacity-0 scale-90' 
+                      : 'opacity-100 scale-100'
+                  }`}
                   style={{
-                    transform: isCenter ? 'scale(1.1)' : 'scale(0.85)',
+                    transform: isCenter 
+                      ? 'translateX(0) scale(1.05)' 
+                      : `translateX(${index === 0 ? '-30px' : index === 2 ? '30px' : '0'}) scale(0.9)`,
                     zIndex: isCenter ? 10 : 5,
-                    transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transition: 'all 600ms cubic-bezier(0.23, 1, 0.32, 1)',
                   }}
                 >
-                  <div className="w-64">
+                  <div className={cardWidth}>
                     <ProjectCard project={p} featured />
                   </div>
                 </div>
@@ -87,14 +92,14 @@ export default function FeaturedRow({ projects }: Props) {
             })}
           </div>
 
-          {/* Right button */}
+          {/* Right button - more visible */}
           <button
             onClick={nextCard}
-            className="absolute right-4 z-10 p-2 rounded-full bg-black border border-teal text-teal hover:bg-teal hover:text-black transition-all"
+            className="absolute right-2 md:right-8 z-20 p-3 rounded-full bg-black border-2 border-teal text-teal hover:bg-teal hover:text-black transition-all shadow-lg"
             aria-label="Next card"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>

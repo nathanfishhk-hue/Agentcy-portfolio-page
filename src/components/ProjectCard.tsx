@@ -18,54 +18,18 @@ export default function ProjectCard({ project, style, featured = false }: Props)
     backgroundColor: '#111',
   };
 
-  if (featured) {
-    return (
-      <article
-        className="fade-in stagger rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all flex flex-col h-full bg-white"
-        style={style}
-      >
-        {/* Thumbnail */}
-        <div
-          className="w-full"
-          style={thumbStyle}
-          aria-label={`${project.name} preview`}
-        />
+  const cardClasses = featured
+    ? 'fade-in stagger rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all flex flex-col h-full bg-white'
+    : 'fade-in stagger rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all flex flex-col h-full bg-white';
 
-        {/* Content */}
-        <div className="p-4 flex-1 flex flex-col">
-          <h3 className="text-lg font-semibold mb-2 text-white">{project.name}</h3>
-          <p className="text-xs mb-3 flex-1 text-gray-300">
-            {project.description || project.tagline}
-          </p>
-
-          {/* Tech Badges */}
-          {project.techStack.length > 0 && (
-            <div className="flex flex-wrap gap-1 mb-3">
-              {project.techStack.slice(0, 3).map(tech => (
-                <TechBadge key={tech} tech={tech} small />
-              ))}
-            </div>
-          )}
-
-          {/* Link Button */}
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-sm text-xs w-full text-center"
-          >
-            View Project
-          </a>
-        </div>
-      </article>
-    );
-  }
+  const contentPadding = featured ? 'p-3' : 'p-5';
+  const titleSize = featured ? 'text-base' : 'text-xl';
+  const descriptionSize = featured ? 'text-xs' : 'text-sm';
+  const badgeGap = featured ? 'gap-1' : 'gap-2';
+  const maxTech = featured ? 3 : 4;
 
   return (
-    <article
-      className="fade-in stagger rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all flex flex-col h-full bg-white"
-      style={style}
-    >
+    <article className={cardClasses} style={style}>
       {/* Thumbnail */}
       <div
         className="w-full"
@@ -74,17 +38,17 @@ export default function ProjectCard({ project, style, featured = false }: Props)
       />
 
       {/* Content */}
-      <div className="p-5 flex-1 flex flex-col">
-        <h3 className="text-xl font-semibold mb-2 text-white">{project.name}</h3>
-        <p className="text-sm mb-4 flex-1 text-gray-300">
+      <div className={`${contentPadding} flex-1 flex flex-col items-center text-center`}>
+        <h3 className={`${titleSize} font-semibold mb-2 text-white`}>{project.name}</h3>
+        <p className={`${descriptionSize} mb-4 flex-1 text-gray-300 px-2`}>
           {project.description || project.tagline}
         </p>
 
         {/* Tech Badges */}
         {project.techStack.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            {project.techStack.slice(0, 4).map(tech => (
-              <TechBadge key={tech} tech={tech} />
+          <div className={`flex flex-wrap ${badgeGap} mb-4 justify-center`}>
+            {project.techStack.slice(0, maxTech).map(tech => (
+              <TechBadge key={tech} tech={tech} small={featured} />
             ))}
           </div>
         )}
@@ -94,7 +58,7 @@ export default function ProjectCard({ project, style, featured = false }: Props)
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn text-sm w-full text-center"
+          className={featured ? 'btn btn-sm text-xs w-full text-center' : 'btn text-sm w-full text-center'}
         >
           View Project
         </a>
