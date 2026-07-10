@@ -59,12 +59,8 @@ a {
 @media (min-width: 1024px) {
   .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr) !important; }
   .lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr) !important; }
-}
-
-/* Center last row when incomplete */
-.grid-last-center:last-child {
-  grid-column: 1 / -1;
-  justify-self: center;
+  .lg\:col-start-2 { grid-column-start: 2 !important; }
+  .lg\:col-span-2 { grid-column-end: span 2 !important; }
 }
 
 /* Flex */
