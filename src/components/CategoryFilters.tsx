@@ -23,8 +23,8 @@ export default function CategoryFilters({ categories, active, onChange }: Props)
               onClick={() => onChange(cat)}
               className={`btn ${active === cat ? '' : 'btn-outline'}`}
             >
-              {cat}
-            </button>
+            {cat}
+          </button>
           ))}
         </div>
       </div>

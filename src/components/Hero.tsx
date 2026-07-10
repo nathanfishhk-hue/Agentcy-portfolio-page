@@ -20,10 +20,10 @@ export default function Hero() {
   return (
     <section ref={ref} className="fade-in pt-24 pb-16 text-center">
       <div className="container">
-        <h1 className="text-5xl md:text-7xl font-bold mb-4">
+        <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white">
           Our Work
         </h1>
-        <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-8">
+        <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8">
           17 products built for clients across AI, SaaS, and digital transformation.
           Each solves a real problem with clean code and thoughtful design.
         </p>
