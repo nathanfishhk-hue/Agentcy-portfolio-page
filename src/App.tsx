@@ -8,6 +8,7 @@ import Hero from './components/Hero';
 import FeaturedRow from './components/FeaturedRow';
 import CategoryFilters from './components/CategoryFilters';
 import ProjectGrid from './components/ProjectGrid';
+import ProjectCarousel3D from './components/ProjectCarousel3D';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -29,7 +30,10 @@ export default function App() {
         active={activeCategory}
         onChange={setActiveCategory}
       />
-      <ProjectGrid projects={filtered} />
+      {activeCategory === 'All'
+        ? <ProjectCarousel3D projects={projects} />
+        : <ProjectGrid projects={filtered} />
+      }
       <Footer />
     </div>
   );
