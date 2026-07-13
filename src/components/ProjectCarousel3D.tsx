@@ -1,28 +1,33 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { Html, OrbitControls } from '@react-three/drei';
 import type { Project } from '../data/projects';
+import ProjectCard2D from './ProjectCard';
 
 interface Props {
   projects: Project[];
 }
 
-function ProjectCard({ project, angle }: { project: Project; angle: number }) {
+function CarouselCard({ project, angle }: { project: Project; angle: number }) {
+  const x = Math.sin(angle) * 5.5;
+  const z = Math.cos(angle) * 5.5;
+
   return (
-    <group position={[Math.sin(angle) * 5.5, 0, Math.cos(angle) * 5.5]} rotation={[0, -angle, 0]}>
-      <mesh
-        onPointerOver={(e) => {
-          const mesh = e.object;
-          mesh.scale.setScalar(1.1);
+    <group position={[x, 0, z]} rotation={[0, -angle, 0]}>
+      <Html
+        transform
+        occlude
+        geometry={<planeGeometry args={[4, 2.5]} />}
+        style={{
+          width: '280px',
+          height: '180px',
+          pointerEvents: 'auto',
         }}
-        onPointerOut={(e) => {
-          const mesh = e.object;
-          mesh.scale.setScalar(1);
-        }}
-        onClick={() => window.open(project.url, '_blank')}
+        distanceFactor={1.5}
       >
-        <planeGeometry args={[3.2, 1.8]} />
-        <meshBasicMaterial color="#1a1a1a" opacity={0.95} transparent />
-      </mesh>
+        <div className="w-[280px] h-[180px]">
+          <ProjectCard2D project={project} featured={false} />
+        </div>
+      </Html>
     </group>
   );
 }
@@ -44,7 +49,7 @@ function CarouselScene({ projects }: { projects: Project[] }) {
         autoRotateSpeed={0.5}
       />
       {projects.map((project, i) => (
-        <ProjectCard
+        <CarouselCard
           key={project.slug}
           project={project}
           angle={angleStep * i}
