@@ -20,9 +20,8 @@ function ProjectCard({ project, angle }: { project: Project; angle: number }) {
         }}
         onClick={() => window.open(project.url, '_blank')}
       >
-        <plane args={[3.2, 1.8]}>
-          <meshBasicMaterial color="#1a1a1a" opacity={0.95} transparent />
-        </plane>
+        <planeGeometry args={[3.2, 1.8]} />
+        <meshBasicMaterial color="#1a1a1a" opacity={0.95} transparent />
       </mesh>
     </group>
   );
